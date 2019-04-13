@@ -53,8 +53,8 @@ namespace XUnitTestProject1
             Assert.IsType<OkObjectResult>(data);
             var okResult = data.Should().BeOfType<OkObjectResult>().Subject;
             var prod= okResult.Value.Should().BeAssignableTo<ProductCategory>().Subject;
-            Assert.Equal("Autmn Collection", prod.CategoryName);
-            Assert.Equal("Floral Collection", prod.CategoryDescription);
+            Assert.Equal("Summer Collection", prod.CategoryName);
+            Assert.Equal("Cotton", prod.CategoryDescription);
 
         }
         [Fact]
@@ -98,7 +98,7 @@ namespace XUnitTestProject1
         public async void Task_DeleteCategory_Return_OkResult()
         {
             var controller = new ProductCategoryController(context);
-            var id =9;
+            var id =3;
             var data = await controller.Delete(id);
             Assert.IsType<OkObjectResult>(data);
         }
@@ -122,12 +122,12 @@ namespace XUnitTestProject1
         public async void Task_Put_CategoryById_OKResult()
         {
             var controller = new ProductCategoryController(context);
-            int id =2;
+            int id =3;
             var productCategory = new ProductCategory()
             {
-                ProductCategoryId = 2,
-                CategoryName = "Winter",
-                CategoryDescription ="Pullover Collection"
+                ProductCategoryId = 3,
+                CategoryName = "Summer Collection",
+                CategoryDescription = "Cotton Material"
 
             };
             var data = await controller.Put(id, productCategory);

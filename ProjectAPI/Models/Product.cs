@@ -23,5 +23,7 @@ namespace ProjectAPI.Models
 
         public int ProductCategoryId { get; set; }
        public virtual ProductCategory Category { get; set; }
+        public int BrandId { get; set; }
+        public Brand Brands { get; set; }
     }
 }

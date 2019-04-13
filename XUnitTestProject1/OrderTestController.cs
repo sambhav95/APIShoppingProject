@@ -33,7 +33,7 @@ namespace XUnitTestProject1
         public async void Task_GetOrderById_Return_OkResult()
         {
             var controller = new OrdersController(_context);
-            var OrderId = 1;
+            var OrderId = 2;
             var data = await controller.GetOrder(OrderId);
             Assert.IsType<OkObjectResult>(data);
         }

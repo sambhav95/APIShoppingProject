@@ -33,7 +33,7 @@ namespace XUnitTestProject1
         public async void Task_GetPById_Return_OkResult()
         {
             var controller = new ProductController(_context);
-            var PcId = 2;
+            var PcId = 1;
             var data = await controller.Get(PcId);
             Assert.IsType<OkObjectResult>(data);
         }
@@ -46,22 +46,23 @@ namespace XUnitTestProject1
             Assert.IsType<NotFoundResult>(data);
         }
         [Fact]
-        public async void Task_GetUserById_MatchResult()
+        public async void Task_GetProductById_MatchResult()
         {
             var controller = new ProductController(_context);
-            int id = 2;
+            int id = 25;
             var data = await controller.Get(id);
             Assert.IsType<OkObjectResult>(data);
             var OkResult = data.Should().BeOfType<OkObjectResult>().Subject;
             var user = OkResult.Value.Should().BeAssignableTo<Product>().Subject;
 
-            Assert.Equal("shirt", user.ProductName);
-            Assert.Equal(700, user.ProductQty);
-            Assert.Equal(600, user.ProductPrice);
-            Assert.Equal("https://assets.myntassets.com/h_1440,q_100,w_1080/v1/assets/images/1758578/2017/5/12/11494569522819-WROGN-Men-Shirts-8521494569522516-1.jpg", user.ProductImage);
-            Assert.Equal("Cotton ", user.ProductDescription);
+            Assert.Equal("Saree", user.ProductName);
+            Assert.Equal(100, user.ProductQty);
+            Assert.Equal(5799, user.ProductPrice);
+            Assert.Equal("https://assets.myntassets.com/h_1440,q_100,w_1080/v1/assets/images/2133537/2017/9/20/11505885340667-Ishin-Chanderi-Silk-Cotton-Black-Solid-Party-Wear-Bollywood-New-Collection-With-Golden-Zari-Border-Trendy-Womens-Saree-9201505885340560-1.jpg", user.ProductImage);
+            Assert.Equal("for ladies", user.ProductDescription);
             Assert.Equal(2, user.VendorId);
-            Assert.Equal(2, user.ProductCategoryId);
+            Assert.Equal(1, user.ProductCategoryId);
+            Assert.Equal(1, user.BrandId);
 
         }
 
@@ -86,8 +87,10 @@ namespace XUnitTestProject1
                 ProductPrice = 1900,
                 ProductImage = "NULL",
                 ProductDescription = "traildone",
-                VendorId = 1,
-                ProductCategoryId = 2
+                VendorId = 2,
+                ProductCategoryId = 3,
+                BrandId=1
+                
             };
             var data = await controller.Post(user);
             Assert.IsType<CreatedAtActionResult>(data);
@@ -109,7 +112,7 @@ namespace XUnitTestProject1
         public async void Task_DeleteUser_return_OkResult()
         {
             var controller = new ProductController(_context);
-            var id = 7;
+            var id = 29;
             var data = await controller.Delete(id);
             Assert.IsType<OkObjectResult>(data);
         }
@@ -133,18 +136,19 @@ namespace XUnitTestProject1
         public async void Task_PutUserId_OkResult()
         {
             var controller = new ProductController(_context);
-            int id =4;
+            int id =25;
 
             var prod = new Product()
             {
-                ProductId = 4,
+                ProductId = 25,
                 ProductName = "Saree",
                 ProductQty = 100,
                 ProductPrice = 5799,
                 ProductImage = "https://assets.myntassets.com/h_1440,q_100,w_1080/v1/assets/images/2133537/2017/9/20/11505885340667-Ishin-Chanderi-Silk-Cotton-Black-Solid-Party-Wear-Bollywood-New-Collection-With-Golden-Zari-Border-Trendy-Womens-Saree-9201505885340560-1.jpg",
                 ProductDescription = "for ladies",
-                VendorId = 1,
-                ProductCategoryId = 2
+                VendorId = 2,
+                ProductCategoryId = 1,
+                BrandId=1
             };
             var data = await controller.Put(id, prod);
             Assert.IsType<NoContentResult>(data);
@@ -153,18 +157,19 @@ namespace XUnitTestProject1
         public async void Task_PutUserId_NotFound()
         {
             var controller = new ProductController(_context);
-            int? id = 5;
+            int? id = 4;
 
             var prod = new Product()
             {
-                ProductId = 4,
+                ProductId = 25,
                 ProductName = "Saree",
                 ProductQty = 100,
                 ProductPrice = 5799,
                 ProductImage = "https://assets.myntassets.com/h_1440,q_100,w_1080/v1/assets/images/2133537/2017/9/20/11505885340667-Ishin-Chanderi-Silk-Cotton-Black-Solid-Party-Wear-Bollywood-New-Collection-With-Golden-Zari-Border-Trendy-Womens-Saree-9201505885340560-1.jpg",
                 ProductDescription = "for ladies",
-                VendorId = 1,
-                ProductCategoryId = 2
+                VendorId = 2,
+                ProductCategoryId = 1,
+                BrandId=1
             };
             var data = await controller.Put(id, prod);
             Assert.IsType<NotFoundResult>(data);

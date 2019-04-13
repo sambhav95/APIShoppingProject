@@ -30,7 +30,7 @@ namespace XUnitTestProject1
         public async void Task_GetVendorBy_Id_Return_OkResult()
         {
             var controller = new VendorController(context);
-            var VendorId = 1;
+            var VendorId = 2;
             var data = await controller.Get(VendorId);
             Assert.IsType<OkObjectResult>(data);
         }
@@ -46,15 +46,15 @@ namespace XUnitTestProject1
         public async void Task_GetVendorById_MatchResult()
         {
             var controller = new VendorController(context);
-            int id = 4;
+            int id = 2;
             var data = await controller.Get(id);
             Assert.IsType<OkObjectResult>(data);
             var okResult = data.Should().BeOfType<OkObjectResult>().Subject;
             var vend = okResult.Value.Should().BeAssignableTo<Vendor>().Subject;
-            Assert.Equal("Sambhav", vend.VendorName);
-            Assert.Equal("sa@gmail.com", vend.EmailId);
-            Assert.Equal(9856324155, vend.PhoneNo);
-            Assert.Equal("Nice!!", vend.VendorDescription);
+            Assert.Equal("Himanshi", vend.VendorName);
+            Assert.Equal("Himi@gmail.com", vend.EmailId);
+            Assert.Equal(890878767, vend.PhoneNo);
+            Assert.Equal("Great!", vend.VendorDescription);
           
         }
         [Fact]
@@ -101,7 +101,7 @@ namespace XUnitTestProject1
         public async void Task_Delete_Return_OkResult()
         {
             var controller = new VendorController(context);
-            var id = 13;
+            var id = 1;
             var data = await controller.Delete(id);
             Assert.IsType<OkObjectResult>(data);
         }
